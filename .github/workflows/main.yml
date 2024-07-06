@@ -1,0 +1,47 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-boneio-24-sw:
+    name: build boneio-24-sw
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: build
+        uses: esphome/build-action@v1
+        id: esphome-build
+        with:
+          yaml_file: boneio-24-sw-07-737d50.yaml
+      - run: |
+          mkdir output
+          mv "${{ steps.esphome-build.outputs.name }}" output/
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: boneio-24-sw
+          path: output
+
+  build-boneio-dr-8ch:
+    name: build boneio-dr-8ch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: build
+        uses: esphome/build-action@v1
+        id: esphome-build
+        with:
+          yaml_file: boneio-dr-8ch-03-4023d4.yaml
+      - run: |
+          mkdir output
+          mv "${{ steps.esphome-build.outputs.name }}" output/
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: boneio-dr-8ch
+          path: output
