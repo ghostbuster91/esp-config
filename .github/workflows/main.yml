@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  ESPHOME_VERSION: 2024.4.2
+
 jobs:
   build-boneio-24-sw:
     name: build boneio-24-sw
@@ -18,6 +21,7 @@ jobs:
         id: esphome-build
         with:
           yaml_file: boneio-24-sw-07-737d50.yaml
+          version: ${{ env.ESPHOME_VERSION }}
       - run: |
           mkdir output
           mv "${{ steps.esphome-build.outputs.name }}" output/
@@ -38,6 +42,7 @@ jobs:
         id: esphome-build
         with:
           yaml_file: boneio-dr-8ch-03-4023d4.yaml
+          version: ${{ env.ESPHOME_VERSION }}
       - run: |
           mkdir output
           mv "${{ steps.esphome-build.outputs.name }}" output/
